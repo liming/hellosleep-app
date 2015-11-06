@@ -1,0 +1,154 @@
+{
+    "evaluations": [
+        {
+            "text": "基本信息",
+            "page": "single",
+            "data": [
+                {
+                    "text": "邮箱",
+                    "type": "TextField",
+                    "placeHolder": "输入你的邮箱"
+                },
+                {
+                    "text": "生日",
+                    "type": "DatePicker"
+                },
+                {
+                    "text": "性别",
+                    "type": "Radio",
+                    "data": [
+                        {
+                            "text": "男",
+                            "type": "Text"
+                        },
+                        {
+                            "text": "女",
+                            "type": "Text"
+                        }
+                    ]
+                },
+                {
+                    "text": "状态",
+                    "type": "DropDown",
+                    "data": [
+                        {
+                            "text": "工作"
+                        },
+                        {
+                            "text": "上学"
+                        },
+                        {
+                            "text": "待业"
+                        },
+                        {
+                            "text": "孕期"
+                        },
+                        {
+                            "text": "产后"
+                        },
+                        {
+                            "text": "退休"
+                        }
+                    ],
+                    "results": [
+                        {
+                            "calc": "this.selected == 2",
+                            "tagId": "无所事事"
+                        },
+                        {
+                            "calc": "this.selected == 4",
+                            "tagId": "产后"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "text": "睡眠相关",
+            "page": "multiple",
+            "data": [
+                {
+                    "id": "1",
+                    "text": "通常几点睡觉？",
+                    "type": "Radio",
+                    "data": [
+                        {
+                            "text": "选择时间",
+                            "type": "TimePicker"
+                        },
+                        {
+                            "text": "不固定",
+                            "type": "Text"
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "text": "通常几点起床？",
+                    "type": "Radio",
+                    "data": [
+                        {
+                            "text": "选择时间",
+                            "type": "TimePicker"
+                        },
+                        {
+                            "text": "不固定",
+                            "type": "Text"
+                        }
+                    ],
+                    "results": [
+                        {
+                            "calc": "this.selected == 1",
+                            "tagId": "赖床"
+                        }
+                    ]
+                },
+                {
+                    "id": "3",
+                    "text": "晚上的实际睡眠时间有多少？",
+                    "type": "DropDown",
+                    "data": [
+                        {
+                            "text": "少于3个小时",
+                            "type": "Text"
+                        },
+                        {
+                            "text": "3到4个小时",
+                            "type": "Text"
+                        },
+                        {
+                            "text": "4到5个小时",
+                            "type": "Text"
+                        },
+                        {
+                            "text": "5到6个小时",
+                            "type": "Text"
+                        },
+                        {
+                            "text": "6个小时以上",
+                            "type": "Text"
+                        },
+                        {
+                            "text": "不固定",
+                            "type": "Text"
+                        }
+                    ],
+                    "results": [
+                        {
+                            "calc": "(parent.data[0] - parent.data[1]) / parent.data[2]"
+                        }
+                    ]
+                    
+                },
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "id": "无所事事"
+        },
+        {
+            "id": "产后"
+        }
+    ]
+}
