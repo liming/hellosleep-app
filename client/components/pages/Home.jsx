@@ -39,10 +39,6 @@ Home = React.createClass({
   _getHomePageContent() {
 
     let styles = {
-      root: {
-        backgroundColor: Colors.grey200,
-      },
-      
       content: {
         backgroundColor: Colors.grey100,
         textAlign: 'center'
@@ -50,7 +46,7 @@ Home = React.createClass({
       
       label: {
         fontSize: 20,
-        fontWeight: Typography.fontWeightLight,
+        fontWeight: Typography.fontWeightBold,
         padding: 40
       }
     };

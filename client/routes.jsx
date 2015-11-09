@@ -1,7 +1,8 @@
 var {  
   Router,
   Route,
-  IndexRoute
+  IndexRoute,
+  Redirect
 } = ReactRouter;
 
 let history = History.createHistory();
@@ -16,7 +17,11 @@ Routes = React.createClass({
         <Route path="/" component={App}>
           <Route path="home" component={Home} />
           <Route path="about" component={About} />
-          <Route path="evaluation" component={Evaluation} />
+
+          <Redirect from="evaluation" to="/questions/1" />
+          <Route path="evaluation" component={Evaluation}>
+            <Route path="/questions/:id" component={Question} />
+          </Route>
           <IndexRoute component={Home}/>
         </Route>
       </Router>
