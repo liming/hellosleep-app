@@ -28,11 +28,9 @@ App = React.createClass({
 
   render() {
     return (
-      <div id="container">
-        <AppCanvas>
-          {this.props.children}
-        </AppCanvas>
-      </div>
+      <AppCanvas>
+        {this.props.children}
+      </AppCanvas>
     )
   }
   

@@ -1,3 +1,5 @@
 Meteor.startup(function () {
-  React.render(<Routes />, document.body);
+  injectTapEventPlugin();
+  ReactDOM.render(<Routes />, document.body);
+  // ReactDOM.render(<Routes />, document.getElementById('container'));
 });

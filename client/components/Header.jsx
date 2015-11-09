@@ -6,15 +6,15 @@ const {
 
 Header = React.createClass({
   render: function() {
-    let styles = {
-        fill: "white"
-    };
     
     return (
       <AppBar title={this.props.title}
-              iconElementLeft={<IconButton><SvgIcons.ActionHome /></IconButton>}
-              iconElementRight={<FlatButton label="Save" />} />
-              /* iconElementLeft=<SvgIcons.ActionHome style={styles} /> />*/
+              style={{position: 'absolute', top: 0}}
+              onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap} />
     )
-  }
+  },
+
+  _onLeftIconButtonTouchTap() {
+    this.props.onLeftIconClick();
+  },
 });

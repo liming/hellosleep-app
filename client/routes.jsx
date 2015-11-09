@@ -1,9 +1,10 @@
 var {  
   Router,
-  Route
+  Route,
+  IndexRoute
 } = ReactRouter;
 
-let history = createHistory();
+let history = History.createHistory();
 
 Routes = React.createClass({
   getInitialState: function() {
@@ -12,8 +13,11 @@ Routes = React.createClass({
   render: function () {
     return (
       <Router history={history}>
-        <Route component={App}>
-          <Route path="/" component={FrontPage} />
+        <Route path="/" component={App}>
+          <Route path="home" component={Home} />
+          <Route path="about" component={About} />
+          <Route path="evaluation" component={Evaluation} />
+          <IndexRoute component={Home}/>
         </Route>
       </Router>
     );
