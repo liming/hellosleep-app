@@ -54,11 +54,11 @@ Home = React.createClass({
     return (
       <FullWidthSection style={styles.content}>
         <RaisedButton
-backgroundColor={Colors.lightGreen700}
-primary={true}
-onTouchTap={this._onStartEvaluate}
-labelStyle={styles.label}
-label="开始睡眠评估" />
+            backgroundColor={Colors.lightGreen700}
+            primary={true}
+            onTouchTap={this._onStartEvaluate}
+            labelStyle={styles.label}
+            label="开始睡眠评估" />
       </FullWidthSection>
     );
   },

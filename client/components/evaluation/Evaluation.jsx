@@ -18,8 +18,11 @@ Evaluation = React.createClass({
 
   getInitialState() {
     return {
-      step: this.props.params.id
     }
+  },
+
+  getMeteorData() {
+    return {}
   },
 
   contextTypes: {
@@ -27,7 +30,8 @@ Evaluation = React.createClass({
   },
 
   mixins: [
-    StylePropable
+    StylePropable,
+    ReactMeteorData
   ],
   
   render: function() {
@@ -54,20 +58,26 @@ Evaluation = React.createClass({
         margin: '0 auto'
       }
     };
-    
+
+    var step = this.props.params.step;
+    var question = this.getCurrentQuestion();
+
     return (
       <FullWidthSection style={styles.root}>
         <div style={this.prepareStyles(styles.content)}>
-          {React.cloneElement(this.props.children, {step: this.state.step})}
+          {React.cloneElement(this.props.children, {
+             step: step,
+             question: question
+           })}
 
-          {this._getNavigation()}
+          {this._getNavigation(step)}
         </div>
         
       </FullWidthSection>
     );
   },
 
-  _getNavigation() {
+  _getNavigation(step) {
 
     let styles = {
       label: {
@@ -84,42 +94,70 @@ Evaluation = React.createClass({
       }
     };
 
-    let prevButton = (<RaisedButton
-      backgroundColor={Colors.lightGreen700}
-      secondary={true}
-      onTouchTap={this._onPrevQuestion}
-      labelStyle={styles.label}
-      style={styles.prev}
-      label="上一页" />);
+    let prevButton = (
+      <RaisedButton
+          backgroundColor={Colors.lightGreen700}
+          secondary={true}
+          onTouchTap={this._onPrevQuestion}
+          labelStyle={styles.label}
+          style={styles.prev}
+          label="上一页" />);
 
-    let nextButton = (<RaisedButton
-backgroundColor={Colors.lightGreen700}
-secondary={true}
-onTouchTap={this._onNextQuestion}
-labelStyle={styles.label}
-style={styles.next}
-label="下一页" />);
+    let nextButton = (
+      <RaisedButton
+          backgroundColor={Colors.lightGreen700}
+          secondary={true}
+          onTouchTap={this._onNextQuestion}
+          labelStyle={styles.label}
+          style={styles.next}
+          label="下一页" />);
 
     return (
       <div>
-        {parseInt(this.state.step) > 1 ? prevButton : null }
-        {nextButton}
+        {parseInt(step) > 1 ? prevButton : null }
+        {parseInt(step) < this.props.navmap.totalStep ? nextButton : null }
       </div>
     );
   },
 
+  getCurrentQuestion() {
+    // we need get the current question with step url params.
+    
+    var step = this.props.params.step;
+    var stepCounts = this.props.navmap.stepCounts;
+
+    // get question data
+    var count = 0, categoryIndex = 0, questionIndex = 0;
+    stepCounts.some((v, i) => {
+      var prev = count;
+      count += v;
+      if (step <= count && step > prev) {
+        categoryIndex = i;
+        questionIndex = step - prev - 1;
+
+        return true;
+      }
+    });
+
+    // get question data
+    var evaluation = this.props.evaluations[categoryIndex];
+    var question = evaluation.page == 'single' ? evaluation.data : evaluation.data[questionIndex];
+
+    return question;
+  },
+
   _onNextQuestion() {
-    this.setState({step: parseInt(this.state.step) + 1});
-    this._navToStep();
+    let step = this.props.params.step;
+    this._navToStep(parseInt(step) + 1);
   },
 
   _onPrevQuestion() {
-    this.setState({step: parseInt(this.state.step) - 1});
-    this._navToStep();
+    let step = this.props.params.step;
+    this._navToStep(parseInt(step) - 1);
   },
 
-  _navToStep() {
-    this.props.history.pushState(null, '/questions/' + this.state.step);
+  _navToStep(step) {
+    this.props.history.pushState(null, '/evaluation/steps/' + step);
   }
 
 });

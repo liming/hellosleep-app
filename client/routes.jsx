@@ -18,9 +18,9 @@ Routes = React.createClass({
           <Route path="home" component={Home} />
           <Route path="about" component={About} />
 
-          <Redirect from="evaluation" to="/questions/1" />
+          <Redirect from="evaluation" to="/evaluation/steps/1" />
           <Route path="evaluation" component={Evaluation}>
-            <Route path="/questions/:id" component={Question} />
+            <Route path="steps/:step" component={Question} />
           </Route>
           <IndexRoute component={Home}/>
         </Route>
