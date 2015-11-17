@@ -7,16 +7,17 @@
             "data": [
                 {
                     "text": "邮箱",
-                    "type": "TextField",
+                    "type": "TextFieldChoice",
                     "placeHolder": "输入你的邮箱"
                 },
                 {
                     "text": "生日",
-                    "type": "DatePicker"
+                    "type": "DatePickerChoice"
                 },
                 {
                     "text": "性别",
-                    "type": "Radio",
+                    "name": "gender",
+                    "type": "RadioChoice",
                     "data": [
                         {
                             "text": "男",
@@ -30,7 +31,7 @@
                 },
                 {
                     "text": "状态",
-                    "type": "DropDown",
+                    "type": "DropDownChoice",
                     "data": [
                         {
                             "text": "工作"
@@ -107,7 +108,7 @@
                 {
                     "id": "3",
                     "text": "晚上的实际睡眠时间有多少？",
-                    "type": "DropDown",
+                    "type": "DropDownChoice",
                     "data": [
                         {
                             "text": "少于3个小时",

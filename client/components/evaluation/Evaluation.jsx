@@ -48,7 +48,7 @@ Evaluation = React.createClass({
     let styles = {
       root: {
         backgroundColor: Colors.grey100,
-        textAlign: 'center'
+        textAlign: 'left'
       },
 
       content: {
@@ -59,15 +59,21 @@ Evaluation = React.createClass({
       }
     };
 
-    var step = this.props.params.step;
-    var question = this.getCurrentQuestion();
+    let categoryIndex = this.getCatIndex();
+    const step = this.props.params.step;
+    const evaluation = this.props.evaluations[categoryIndex];
+    const question = this.getCurrentQuestion(evaluation);
+
+    // it means all the question in single page.
+    let singlePage = evaluation.page == 'single' ? true : false;
 
     return (
       <FullWidthSection style={styles.root}>
         <div style={this.prepareStyles(styles.content)}>
           {React.cloneElement(this.props.children, {
              step: step,
-             question: question
+             question: question,
+             singlePage: singlePage
            })}
 
           {this._getNavigation(step)}
@@ -120,14 +126,21 @@ Evaluation = React.createClass({
     );
   },
 
-  getCurrentQuestion() {
+  getCurrentQuestion(evaluation) {
     // we need get the current question with step url params.
-    
-    var step = this.props.params.step;
-    var stepCounts = this.props.navmap.stepCounts;
+    const question = evaluation.page == 'single' ? evaluation.data : evaluation.data[questionIndex];
 
+    return question;
+  },
+
+  getCatIndex() {
+    const step = this.props.params.step;
+    const stepCounts = this.props.navmap.stepCounts;
     // get question data
-    var count = 0, categoryIndex = 0, questionIndex = 0;
+    let count = 0;
+    let categoryIndex = 0;
+    let questionIndex = 0;
+    
     stepCounts.some((v, i) => {
       var prev = count;
       count += v;
@@ -139,11 +152,7 @@ Evaluation = React.createClass({
       }
     });
 
-    // get question data
-    var evaluation = this.props.evaluations[categoryIndex];
-    var question = evaluation.page == 'single' ? evaluation.data : evaluation.data[questionIndex];
-
-    return question;
+    return categoryIndex;
   },
 
   _onNextQuestion() {
