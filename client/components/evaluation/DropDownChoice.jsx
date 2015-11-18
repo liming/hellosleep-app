@@ -16,8 +16,8 @@ DropDownChoice = React.createClass({
 
     return (
       <div>
-        <span>{this.props.text}</span>
-        <DropDownMenu menuItems={menuItems} />
+        <h3>{this.props.text}</h3>
+        <SelectField menuItems={menuItems} />
       </div>
     )
   }

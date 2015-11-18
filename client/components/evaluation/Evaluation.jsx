@@ -59,10 +59,10 @@ Evaluation = React.createClass({
       }
     };
 
-    let categoryIndex = this.getCatIndex();
+    let indexes = this.getIndex();
     const step = this.props.params.step;
-    const evaluation = this.props.evaluations[categoryIndex];
-    const question = this.getCurrentQuestion(evaluation);
+    const evaluation = this.props.evaluations[indexes.categoryIndex];
+    const question = evaluation.page == 'single' ? evaluation.data : evaluation.data[indexes.questionIndex];
 
     // it means all the question in single page.
     let singlePage = evaluation.page == 'single' ? true : false;
@@ -126,14 +126,7 @@ Evaluation = React.createClass({
     );
   },
 
-  getCurrentQuestion(evaluation) {
-    // we need get the current question with step url params.
-    const question = evaluation.page == 'single' ? evaluation.data : evaluation.data[questionIndex];
-
-    return question;
-  },
-
-  getCatIndex() {
+  getIndex() {
     const step = this.props.params.step;
     const stepCounts = this.props.navmap.stepCounts;
     // get question data
@@ -152,7 +145,7 @@ Evaluation = React.createClass({
       }
     });
 
-    return categoryIndex;
+    return {categoryIndex, questionIndex};
   },
 
   _onNextQuestion() {

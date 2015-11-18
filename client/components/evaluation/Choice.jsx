@@ -5,9 +5,15 @@ Choice = React.createClass({
 
     const ChocieType = this.getChoiceType();
 
+    let style = {
+      marginBottom: "10px"
+    }
+
     let {
       ... other
     } = this.props;
+
+    other.style = style;
     
     return (
       <div>

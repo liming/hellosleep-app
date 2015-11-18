@@ -30,8 +30,8 @@
                     ]
                 },
                 {
-                    "text": "状态",
-                    "type": "DropDownChoice",
+                    "text": "你的状态",
+                    "type": "SelectChoice",
                     "data": [
                         {
                             "text": "工作"
@@ -72,7 +72,7 @@
                 {
                     "id": "1",
                     "text": "通常几点睡觉？",
-                    "type": "Radio",
+                    "type": "RadioChoice",
                     "data": [
                         {
                             "text": "选择时间",
@@ -87,7 +87,7 @@
                 {
                     "id": "2",
                     "text": "通常几点起床？",
-                    "type": "Radio",
+                    "type": "RadioChoice",
                     "data": [
                         {
                             "text": "选择时间",
@@ -108,7 +108,7 @@
                 {
                     "id": "3",
                     "text": "晚上的实际睡眠时间有多少？",
-                    "type": "DropDownChoice",
+                    "type": "SelectChoice",
                     "data": [
                         {
                             "text": "少于3个小时",
