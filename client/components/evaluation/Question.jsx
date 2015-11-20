@@ -1,8 +1,18 @@
 Question = React.createClass({
   
   render: function() {
+
+    let style = {
+
+      container: {
+        marginBottom: 20
+      }
+      
+    };
+
+    
     return (
-      <div>
+      <div style={style.container}>
         {this._createPage()}
       </div>
     );
